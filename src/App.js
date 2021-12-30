@@ -5,6 +5,34 @@ function Signup(){
   console.log("Signed Up");
 }
 
+function checkLog(data = {}){
+    fetch('', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+}
+
+function checkLogin(){
+  fetch('http://localhost:3001',{
+    mode: 'no-cors'
+  })
+  .then(response => {
+    if (!response.ok) {
+      console.log(response);
+      throw new Error('Network response was not OK');
+    }
+//    return response.blob();
+  })
+  .then(data => console.log(data))
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+  }) 
+}
+
 class App extends Component{
   state={
     isModalOpen : false
@@ -22,19 +50,17 @@ class App extends Component{
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <form>
         <label>
           <p>Username</p>
-          <input type="text" />
+          <input type="text" name="Username" />
         </label>
         <label>
           <p>Password</p>
-          <input type="password" />
+          <input type="password" name="Password"/>
         </label>
         <div>
-          <button type="submit">Submit</button>
+          <button className="primary" onClick={checkLogin}>Submit</button>
         </div>
-      </form>
         </Modal.Body>
         <Modal.Footer>
           
